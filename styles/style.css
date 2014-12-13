@@ -80,6 +80,16 @@ html, body {
 	-webkit-animation: spin 13s linear infinite;
 }
 
+.menu-overlay{
+	width: 200px;
+	padding: 15px;
+	background-color: black;
+	position: fixed;
+	top: 0;
+	left: 0;
+	opacity: 0.9;
+}
+
 @-webkit-keyframes spin{
 	from{
 		-webkit-transform: rotate(0deg);

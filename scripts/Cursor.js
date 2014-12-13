@@ -2,6 +2,11 @@
  * This file includes logic related to the mouse cursor.
  */
 
+/**
+ * A custom cursor class.
+ * 
+ * @param {Object} options 	The configuration options.
+ */
 function Cursor (options){
 	options = options || {};
 	this.radius = options.radius || 70;
@@ -22,28 +27,33 @@ function Cursor (options){
 	el.style.height = this.radius+'px';
 
 	// Register events
-	var onMouseMoveBinded = onMouseMove.bind(this);
+	var onMouseMoveBinded = this.onMouseMove.bind(this);
 	document.body.addEventListener('mousemove', onMouseMoveBinded);
 	innerEl.appendChild(orbitEl);
 	el.appendChild(innerEl);
 	document.body.appendChild(el);
-
-	// Event handlers.
-	function onMouseMove (e){
-		var newX = e.pageX - this.radius/2 - this.mouseOffset;
-		var newY = e.pageY - this.radius/2 - this.mouseOffset;
-		var transformString = 'translate('+newX+'px,'+newY+'px)';
-		this.el.style.transform = transformString;
-	}
-
-	function onHover (e){
-		this.el.classList.add('hover');
-	}
-
-	function onHoverOut (e){
-		this.el.classList.remove('hover');
-	}
 }
+
+Cursor.prototype.onMouseMove = function(e){
+	// Move the mouse cursor to the right location.
+	var newX = e.pageX - this.radius/2 - this.mouseOffset;
+	var newY = e.pageY - this.radius/2 - this.mouseOffset;
+	var transformString = 'translate('+newX+'px,'+newY+'px)';
+	this.el.style.transform = transformString;
+
+	// TODO: Check for elements underneath.
+	//
+	// If the menu overlay is visible, move it to its correct location.
+	app.menuOverlay.reposition({x: e.pageX, y: e.pageY});
+};
+
+Cursor.prototype.onHover = function(e){
+	this.el.classList.add('hover');
+};
+
+Cursor.prototype.onHoverOut = function(e){
+	this.el.classList.remove('hover');
+};
 
 /**
  * Sets the cursor's hovering mode.

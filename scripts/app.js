@@ -18,6 +18,7 @@ function Application (options){
  */
 Application.prototype.setupControls = function(options){
 	options = options || {};
+	this.menuOverlay = new MenuOverlay();
 	this.cursor = new Cursor(options);
 };
 
