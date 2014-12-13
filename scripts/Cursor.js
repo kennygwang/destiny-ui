@@ -4,8 +4,9 @@
 
 function Cursor (options){
 	options = options || {};
-	this.radius = options.radius || 90;
+	this.radius = options.radius || 70;
 	this.innerRadius = options.radius || 70;
+	this.mouseOffset = 16;
 	this.hovering = false;
 
 	// Create elements for the cursor.
@@ -29,11 +30,10 @@ function Cursor (options){
 
 	// Event handlers.
 	function onMouseMove (e){
-		var newX = e.pageX - this.radius/2;
-		var newY = e.pageY - this.radius/2;
+		var newX = e.pageX - this.radius/2 - this.mouseOffset;
+		var newY = e.pageY - this.radius/2 - this.mouseOffset;
 		var transformString = 'translate('+newX+'px,'+newY+'px)';
 		this.el.style.transform = transformString;
-		console.log(transformString)
 	}
 
 	function onHover (e){
