@@ -33,6 +33,7 @@ function Cursor (options){
 		var newY = e.pageY - this.radius/2;
 		var transformString = 'translate('+newX+'px,'+newY+'px)';
 		this.el.style.transform = transformString;
+		console.log(transformString)
 	}
 
 	function onHover (e){

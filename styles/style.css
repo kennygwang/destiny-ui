@@ -47,6 +47,9 @@ html, body {
 	border-radius: 50%;
 	border: 1px solid lightgray;
 	padding: 16px;
+	top: 0px;
+	left: 0px;
+	position: fixed;
 	transform: translate(0, 0);
 }
 
