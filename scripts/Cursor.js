@@ -9,7 +9,7 @@
  */
 function Cursor (options){
 	options = options || {};
-	this.radius = options.radius || 70;
+	this.radius = options.radius || 35;
 	this.innerRadius = options.radius || 70;
 	this.mouseOffset = 16;
 	this.hovering = false;
