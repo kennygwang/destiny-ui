@@ -4,18 +4,64 @@ html, body {
 	width: 100%;
 	height: 100%;
 	cursor: none;
+	background: rgb(237,234,151); /* Old browsers */
+	background: -moz-linear-gradient(left, rgba(237,234,151,1) 0%, rgba(30,141,160,1) 100%); /* FF3.6+ */
+	background: -webkit-linear-gradient(left, rgba(237,234,151,1) 0%,rgba(30,141,160,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -ms-linear-gradient(left, rgba(237,234,151,1) 0%,rgba(30,141,160,1) 100%); /* IE10+ */
+	background: linear-gradient(to right, rgba(237,234,151,1) 0%,rgba(30,141,160,1) 100%); /* W3C */
 }
 
-#cursor{
-	width: 90px;
-	height: 90px;
+.cursor{
 	border-radius: 50%;
-	background-color: black;
+	border: 1px solid white;
+	transform: translate(0, 0);
+}
+
+.cursor-inner{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background-color: rgba(0, 0, 0, 0.1);
 	opacity: 0.9;
 	position: fixed;
-	box-shadow: 0px 0px 8px 2px gray;
+	box-shadow: 0px 0px 14px 7px whitesmoke;
+	transition: 0.2s ease width, 0.2s ease height, 0.2s ease background-color;
 }
 
-#cursor:hover{
-	background-color: dimgray;
+.cursor-inner.hover{
+	background-color: rgba(50, 50, 50, 0.5);
 }
+
+.cursor-orbit{
+	border: 3px dashed white;
+	border-radius: 50%;
+	position: relative;
+	top: -3px;
+	left: -3px;
+	margin: 0 auto;
+	opacity: 0;
+	width: 70%;
+	height: 70%;
+	margin-top: 15%;
+	margin-left: 15%;
+	transition: 0.6s ease width, 0.6s ease height, 0.6s ease margin, 0.8s ease opacity;
+}
+
+.cursor-orbit.small{
+	opacity: 1;
+	width: 60%;
+	height: 60%;
+	margin-top: 20%;
+	margin-left: 20%;
+	-webkit-animation: spin 13s linear infinite;
+}
+
+@-webkit-keyframes spin{
+	from{
+		-webkit-transform: rotate(0deg);
+	}
+	to{
+		-webkit-transform: rotate(360deg);
+	}
+}
+

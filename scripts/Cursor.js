@@ -5,14 +5,26 @@
 function Cursor (options){
 	options = options || {};
 	this.radius = options.radius || 90;
+	this.innerRadius = options.radius || 70;
+	this.hovering = false;
+
+	// Create elements for the cursor.
 	var el = this.el = document.createElement('div');
-	el.id = 'cursor';
+	var innerEl = this.innerEl = document.createElement('div');
+	var orbitEl = this.orbitEl = document.createElement('div');
+	el.classList.add('cursor');
+	innerEl.classList.add('cursor-inner');
+	orbitEl.classList.add('cursor-orbit');
+
+	// Set the dimensions.
 	el.style.width = this.radius+'px';
 	el.style.height = this.radius+'px';
 
 	// Register events
 	var onMouseMoveBinded = onMouseMove.bind(this);
 	document.body.addEventListener('mousemove', onMouseMoveBinded);
+	innerEl.appendChild(orbitEl);
+	el.appendChild(innerEl);
 	document.body.appendChild(el);
 
 	// Event handlers.
@@ -21,10 +33,32 @@ function Cursor (options){
 		var newY = e.pageY - this.radius/2;
 		var transformString = 'translate('+newX+'px,'+newY+'px)';
 		this.el.style.transform = transformString;
+	}
 
-		// this.el.style.top = newY;
-		// this.el.style.left = newX;
+	function onHover (e){
+		this.el.classList.add('hover');
+	}
+
+	function onHoverOut (e){
+		this.el.classList.remove('hover');
 	}
 }
+
+/**
+ * Sets the cursor's hovering mode.
+ * 
+ * @param {Boolean} isHovering 		Whether or not the cursor is hovering.
+ */
+Cursor.prototype.setHovering = function(isHovering){
+	if (isHovering){
+		this.innerEl.classList.add('hover');
+		this.orbitEl.classList.add('small');
+	} else {
+		this.innerEl.classList.remove('hover');
+		this.orbitEl.classList.remove('small');
+	}
+
+	this.hovering = isHovering;
+};
 
 
