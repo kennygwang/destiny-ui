@@ -82,7 +82,7 @@ html, body {
 
 .menu-overlay{
 	width: 200px;
-	padding: 15px;
+	padding: 150px 10px;
 	background-color: black;
 	position: fixed;
 	top: 0;

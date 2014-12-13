@@ -11,7 +11,12 @@
 function MenuOverlay (selector){
 	selector = selector || '#menuOverlay';
 	var el = this.el = document.querySelector(selector);
+	var headerEl = this.el.querySelector('.header');
+	var titleEl = this.el.querySelector('.title');
+	var subtitleLeftEl = this.el.querySelector('.subtitle-left');
+	var subtitleRightEl = this.el.querySelector('.subtitle-right');
 
+	this.repositionBound = this.reposition.bind(this);
 }
 
 /**
@@ -21,8 +26,18 @@ function MenuOverlay (selector){
  * @param  {Object} mousePos 	The current mouse position.
  */
 MenuOverlay.prototype.reposition = function(mousePos){
-	var newX = e.pageX - this.radius/2 - this.mouseOffset;
-	var newY = e.pageY - this.radius/2 - this.mouseOffset;
+	var newX = mousePos.x;
+	var newY = mousePos.y - app.cursor.radius;
+	var width = this.el.getBoundingClientRect().width;
+	var height = this.el.getBoundingClientRect().height;
+	var bottomY = newY + height;
+
+	// Account for page overflow.
+	newX += (newX > window.innerWidth / 2) ? -(width+80) : 80;
+	if (newY < 70) newY = 70;
+	if (bottomY > window.innerHeight) newY = window.innerHeight - height;
+
+	// Set the new position.
 	var transformString = 'translate('+newX+'px,'+newY+'px)';
 	this.el.style.transform = transformString;
 };

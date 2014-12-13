@@ -26,9 +26,11 @@ function Cursor (options){
 	el.style.width = this.radius+'px';
 	el.style.height = this.radius+'px';
 
-	// Register events
-	var onMouseMoveBinded = this.onMouseMove.bind(this);
-	document.body.addEventListener('mousemove', onMouseMoveBinded);
+	// Register events.
+	this.onMouseMove = this.onMouseMove.bind(this);
+	document.body.addEventListener('mousemove', this.onMouseMove);
+
+	// Add elements to the page.
 	innerEl.appendChild(orbitEl);
 	el.appendChild(innerEl);
 	document.body.appendChild(el);
